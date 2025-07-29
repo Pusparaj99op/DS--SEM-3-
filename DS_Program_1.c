@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
 int findNumber(int numbers[], int count, int searchValue) {
     int position;
     
@@ -15,8 +14,7 @@ int findNumber(int numbers[], int count, int searchValue) {
         if (numbers[position] == searchValue) {
             return position;
         }
-    }
-    
+    }   
     return -1;
 }
 int main() {
@@ -26,7 +24,7 @@ int main() {
     
     int* listOfNumbers = (int*) malloc(howManyNumbers * sizeof(int));
     
-    printf("Please enter %d numbers:\n", howManyNumbers);
+    printf("\n Please enter %d numbers:\n", howManyNumbers);
     int i;
     for (i = 0; i < howManyNumbers; i++) {
         printf("Number %d: ", i+1);
@@ -42,7 +40,7 @@ int main() {
     if (whereIsIt != -1) {
         printf("\nGood news brooo! I found your number at position %d\n", whereIsIt + 1);
     } else {
-        printf("\nSorry broo!!, that number is not in the list.\n");
+        printf("\nSorry broo!!, that number is not in the Array!!!.\n");
     }   
     free(listOfNumbers);
     return 0;
