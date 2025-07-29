@@ -2,12 +2,12 @@
 // Author : Pranay Gajbhiye
 // Date : 2025-07-29
 // version : 1.0
-// to run this file use command : g++ -o DS_Program_1 DS_Program_1.cpp && .\DS_Program_1
+// to run this file use command : gcc -o DS_Program_1 DS_Program_1.c && .\DS_Program_1
 // theory: linear search theory only
 
 
-#include <iostream> 
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
 
 int linearSearch(int arr[], int size, int target) {
     for (int i = 0; i < size; i++) {
@@ -20,27 +20,27 @@ int linearSearch(int arr[], int size, int target) {
 
 int main() {
     int size;
-    cout << "=================================linear search=================================\n";
-    cout << "\n Enter the size of the array: ";
-    cin >> size;
+    printf("=================================linear search=================================\n");
+    printf("\n Enter the size of the array: ");
+    scanf("%d", &size);
 
-    int* arr = new int[size];
-    cout << "Enter " << size << " elements: ";
+    int* arr = (int*) malloc(size * sizeof(int));
+    printf("Enter %d elements: ", size);
     for (int i = 0; i < size; i++) {
-        cin >> arr[i];
+        scanf("%d", &arr[i]);
     }
 
     int key;
-    cout << "Enter the element to search for: ";
-    cin >> key;
+    printf("Enter the element to search for: ");
+    scanf("%d", &key);
 
     int result = linearSearch(arr, size, key);
     if (result != -1) {
-        cout << "Element found at index: " << result << endl;
+        printf("Element found at index: %d\n", result);
     } else {
-        cout << "Element not found." << endl;
+        printf("Element not found.\n");
     }
 
-    delete[] arr;
+    free(arr);
     return 0;
 }
