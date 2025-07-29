@@ -5,42 +5,45 @@
 // to run this file use command : gcc -o DS_Program_1 DS_Program_1.c && .\DS_Program_1
 // theory: linear search theory only
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
-int linearSearch(int arr[], int size, int target) {
-    for (int i = 0; i < size; i++) {
-        if (arr[i] == target) {
-            return i; 
+int findNumber(int numbers[], int count, int searchValue) {
+    int position;
+    
+    for (position = 0; position < count; position++) {
+        if (numbers[position] == searchValue) {
+            return position;
         }
     }
-    return -1; 
+    
+    return -1;
 }
-
 int main() {
-    int size;
-    printf("=================================linear search=================================\n");
-    printf("\n Enter the size of the array: ");
-    scanf("%d", &size);
-
-    int* arr = (int*) malloc(size * sizeof(int));
-    printf("Enter %d elements: ", size);
-    for (int i = 0; i < size; i++) {
-        scanf("%d", &arr[i]);
+    int howManyNumbers;
+    printf("How many numbers do you want to enter ? (Must Be Integer) ");
+    scanf("%d", &howManyNumbers);
+    
+    int* listOfNumbers = (int*) malloc(howManyNumbers * sizeof(int));
+    
+    printf("Please enter %d numbers:\n", howManyNumbers);
+    int i;
+    for (i = 0; i < howManyNumbers; i++) {
+        printf("Number %d: ", i+1);
+        scanf("%d", &listOfNumbers[i]);
     }
-
-    int key;
-    printf("Enter the element to search for: ");
-    scanf("%d", &key);
-
-    int result = linearSearch(arr, size, key);
-    if (result != -1) {
-        printf("Element found at index: %d\n", result);
+    
+    int numberToFind;
+    printf("\nWhich number do you want to find ? ");
+    scanf("%d", &numberToFind);
+    
+    int whereIsIt = findNumber(listOfNumbers, howManyNumbers, numberToFind);
+    
+    if (whereIsIt != -1) {
+        printf("\nGood news brooo! I found your number at position %d\n", whereIsIt + 1);
     } else {
-        printf("Element not found.\n");
-    }
-
-    free(arr);
+        printf("\nSorry broo!!, that number is not in the list.\n");
+    }   
+    free(listOfNumbers);
     return 0;
 }
