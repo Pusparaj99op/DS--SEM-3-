@@ -1,5 +1,4 @@
-// Aim : Create a C++ Program To Demonstrate The Linar Search Algorithm, take Inputs from User 
-// such as Array Size, Elements of Array and Element to be Searched.
+// Aim : Develop a C program To conduct Linear Search for a key element over an array of n intergers elements report success or failure with app
 // Author : Pranay Gajbhiye
 // Date : 2025-07-29
 // version : 1.0
