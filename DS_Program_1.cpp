@@ -3,7 +3,9 @@
 // Author : Pranay Gajbhiye
 // Date : 2025-07-29
 // version : 1.0
-// to run this file use command : g++ DS_Program_1.cpp -o DS_Program_1.exe && ./DS_Program_1
+// to run this file use command : g++ -o DS_Program_1 DS_Program_1.cpp && .\DS_Program_1
+// theory: linear search theory only
+
 
 #include <iostream> 
 using namespace std;
@@ -11,15 +13,16 @@ using namespace std;
 int linearSearch(int arr[], int size, int target) {
     for (int i = 0; i < size; i++) {
         if (arr[i] == target) {
-            return i; // Return the index if the element is found
+            return i; 
         }
     }
-    return -1; // Return -1 if the element is not found
+    return -1; 
 }
 
 int main() {
     int size;
-    cout << "Enter the size of the array: ";
+    cout << "=================================linear search=================================\n";
+    cout << "\n Enter the size of the array: ";
     cin >> size;
 
     int* arr = new int[size];
