@@ -1,22 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MAX 100
-
 int queue[MAX];
 int front = -1;
 int rear = -1;
-
 // Function to check if queue is empty
 int isEmpty() {
     return front == -1;
 }
-
 // Function to check if queue is full
 int isFull() {
     return rear == MAX - 1;
 }
-
 // Function to add element to queue (enqueue)
 void enqueue(int data) {
     if (isFull()) {
@@ -29,7 +24,6 @@ void enqueue(int data) {
     queue[++rear] = data;
     printf("Enqueued %d to queue\n", data);
 }
-
 // Function to remove element from queue (dequeue)
 int dequeue() {
     if (isEmpty()) {
@@ -46,7 +40,6 @@ int dequeue() {
     printf("Dequeued %d from queue\n", data);
     return data;
 }
-
 // Function to peek front element of queue
 int peek() {
     if (isEmpty()) {
@@ -55,7 +48,6 @@ int peek() {
     }
     return queue[front];
 }
-
 // Function to display queue contents
 void display() {
     if (isEmpty()) {
@@ -68,12 +60,9 @@ void display() {
     }
     printf("\n");
 }
-
 int main() {
     int choice, data;
-
     printf("=== QUEUE OPERATIONS MENU ===\n");
-
     while (1) {
         printf("\n1. Enqueue\n");
         printf("2. Dequeue\n");
@@ -82,7 +71,6 @@ int main() {
         printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         switch (choice) {
             case 1:
                 printf("Enter element to enqueue: ");
@@ -108,6 +96,5 @@ int main() {
                 printf("Invalid choice! Please enter 1-5\n");
         }
     }
-
     return 0;
 }

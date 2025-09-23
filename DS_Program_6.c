@@ -1,22 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MAX 100
-
 int cqueue[MAX];
 int front = -1;
 int rear = -1;
-
 // Function to check if circular queue is empty
 int isEmpty() {
     return front == -1;
 }
-
 // Function to check if circular queue is full
 int isFull() {
     return (rear + 1) % MAX == front;
 }
-
 // Function to add element to circular queue (enqueue)
 void enqueue(int data) {
     if (isFull()) {
@@ -32,7 +27,6 @@ void enqueue(int data) {
     cqueue[rear] = data;
     printf("Enqueued %d to circular queue\n", data);
 }
-
 // Function to remove element from circular queue (dequeue)
 int dequeue() {
     if (isEmpty()) {
@@ -49,7 +43,6 @@ int dequeue() {
     printf("Dequeued %d from circular queue\n", data);
     return data;
 }
-
 // Function to peek front element of circular queue
 int peek() {
     if (isEmpty()) {
@@ -58,7 +51,6 @@ int peek() {
     }
     return cqueue[front];
 }
-
 // Function to display circular queue contents
 void display() {
     if (isEmpty()) {
@@ -73,12 +65,9 @@ void display() {
     } while (i != (rear + 1) % MAX);
     printf("\n");
 }
-
 int main() {
     int choice, data;
-
     printf("=== CIRCULAR QUEUE OPERATIONS MENU ===\n");
-
     while (1) {
         printf("\n1. Enqueue\n");
         printf("2. Dequeue\n");
@@ -113,6 +102,5 @@ int main() {
                 printf("Invalid choice! Please enter 1-5\n");
         }
     }
-
     return 0;
 }

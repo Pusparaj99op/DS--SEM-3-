@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 // Structure for linked list node
 struct Node {
     int data;
     struct Node* next;
 };
-
 // Global head pointer
 struct Node* head = NULL;
-
 // Function to create a new node
 struct Node* createNode(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
@@ -17,7 +14,6 @@ struct Node* createNode(int data) {
     newNode->next = NULL;
     return newNode;
 }
-
 // Function to insert element at the beginning
 void insertAtBeginning(int data) {
     struct Node* newNode = createNode(data);
@@ -25,7 +21,6 @@ void insertAtBeginning(int data) {
     head = newNode;
     printf("Inserted %d at the beginning\n", data);
 }
-
 // Function to insert element at the end
 void insertAtEnd(int data) {
     struct Node* newNode = createNode(data);
@@ -40,14 +35,12 @@ void insertAtEnd(int data) {
     }
     printf("Inserted %d at the end\n", data);
 }
-
 // Function to delete a node with given value
 void deleteNode(int data) {
     if (head == NULL) {
         printf("List is empty! Cannot delete %d\n", data);
         return;
     }
-
     // If head node contains the data to be deleted
     if (head->data == data) {
         struct Node* temp = head;
@@ -56,24 +49,20 @@ void deleteNode(int data) {
         printf("Deleted %d from the list\n", data);
         return;
     }
-
     // Search for the node to be deleted
     struct Node* temp = head;
     while (temp->next != NULL && temp->next->data != data) {
         temp = temp->next;
     }
-
     if (temp->next == NULL) {
         printf("Element %d not found in the list\n", data);
         return;
     }
-
     struct Node* nodeToDelete = temp->next;
     temp->next = nodeToDelete->next;
     free(nodeToDelete);
     printf("Deleted %d from the list\n", data);
 }
-
 // Function to count the number of nodes
 int countNodes() {
     int count = 0;
@@ -84,7 +73,6 @@ int countNodes() {
     }
     return count;
 }
-
 // Function to calculate sum of all elements
 int sumOfElements() {
     int sum = 0;
@@ -95,7 +83,6 @@ int sumOfElements() {
     }
     return sum;
 }
-
 // Function to display the linked list
 void display() {
     if (head == NULL) {
@@ -110,7 +97,6 @@ void display() {
     }
     printf("NULL\n");
 }
-
 // Function to free all nodes
 void freeList() {
     struct Node* temp;
@@ -120,12 +106,9 @@ void freeList() {
         free(temp);
     }
 }
-
 int main() {
     int choice, data;
-
     printf("=== SINGLE LINKED LIST OPERATIONS MENU ===\n");
-
     while (1) {
         printf("\n1. Insert at beginning\n");
         printf("2. Insert at end\n");
@@ -136,7 +119,6 @@ int main() {
         printf("7. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         switch (choice) {
             case 1:
                 printf("Enter element to insert at beginning: ");

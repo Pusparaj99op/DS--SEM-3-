@@ -1,21 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MAX 100
-
 int stack[MAX];
 int top = -1;
-
 // Function to check if stack is empty
 int isEmpty() {
     return top == -1;
 }
-
 // Function to check if stack is full
 int isFull() {
     return top == MAX - 1;
 }
-
 // Function to push element onto stack
 void push(int data) {
     if (isFull()) {
@@ -25,7 +20,6 @@ void push(int data) {
     stack[++top] = data;
     printf("Pushed %d to stack\n", data);
 }
-
 // Function to pop element from stack
 int pop() {
     if (isEmpty()) {
@@ -45,7 +39,6 @@ int peek() {
     }
     return stack[top];
 }
-
 // Function to display stack contents
 void display() {
     if (isEmpty()) {
@@ -58,7 +51,6 @@ void display() {
     }
     printf("\n");
 }
-
 int main() {
     int choice, data;
 
@@ -72,7 +64,6 @@ int main() {
         printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         switch (choice) {
             case 1:
                 printf("Enter element to push: ");
