@@ -1462,3 +1462,667 @@ All four fundamental data structure programs have been successfully implemented 
 The implemented data structures form the foundation for numerous real-world applications including operating system design, compiler construction, database management, networking protocols, and algorithm development. Each structure showcases different trade-offs between memory usage, access patterns, and operational efficiency.
 
 This comprehensive implementation successfully bridges the gap between theoretical computer science concepts and practical programming skills, providing a solid foundation for advanced data structure and algorithm study.
+
+---
+
+## Program 8: Complete Single Linked List Operations
+
+### Aim
+To implement a comprehensive single linked list program with creation, multiple insertion operations (at beginning, end, and specific position), multiple deletion operations (from beginning, end, and specific position), and traversal functionality.
+
+### Theory
+A Single Linked List is a dynamic data structure where each node contains data and a pointer to the next node. This program demonstrates complete linked list operations including positional insertions and deletions.
+
+**Key Operations:**
+- **Creation**: Initialize empty list with head = NULL
+- **Insertion**: Add nodes at beginning, end, or any position
+- **Deletion**: Remove nodes from beginning, end, or any position
+- **Traversal**: Visit and display all nodes sequentially
+
+**Time Complexity:**
+- Insert/Delete at Beginning: O(1)
+- Insert/Delete at End: O(n)
+- Insert/Delete at Position: O(n)
+- Traversal: O(n)
+
+### Algorithm
+
+**Insert at Position:**
+```
+INSERT_AT_POS(data, pos)
+1. Create new node
+2. IF pos == 1, insert at beginning
+3. ELSE traverse to (pos-1)th node
+4. Link new node between nodes
+END
+```
+
+**Delete from Position:**
+```
+DELETE_FROM_POS(pos)
+1. IF pos == 1, delete from beginning
+2. ELSE traverse to (pos-1)th node
+3. Update links and free node
+END
+```
+
+### Code
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertAtBeg(int data) {
+    struct Node* newNode = createNode(data);
+    newNode->next = head;
+    head = newNode;
+    printf("Inserted %d at beginning\n", data);
+}
+
+void insertAtEnd(int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) {
+        head = newNode;
+    } else {
+        struct Node* temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    printf("Inserted %d at end\n", data);
+}
+
+void insertAtPos(int data, int pos) {
+    if (pos == 1) {
+        insertAtBeg(data);
+        return;
+    }
+    struct Node* newNode = createNode(data);
+    struct Node* temp = head;
+    for (int i = 1; i < pos - 1 && temp != NULL; i++) {
+        temp = temp->next;
+    }
+    if (temp == NULL) {
+        printf("Invalid position!\n");
+        free(newNode);
+        return;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+    printf("Inserted %d at position %d\n", data, pos);
+}
+
+void deleteFromBeg() {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    struct Node* temp = head;
+    head = head->next;
+    printf("Deleted %d from beginning\n", temp->data);
+    free(temp);
+}
+
+void deleteFromEnd() {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    if (head->next == NULL) {
+        printf("Deleted %d from end\n", head->data);
+        free(head);
+        head = NULL;
+        return;
+    }
+    struct Node* temp = head;
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+    printf("Deleted %d from end\n", temp->next->data);
+    free(temp->next);
+    temp->next = NULL;
+}
+
+void deleteFromPos(int pos) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    if (pos == 1) {
+        deleteFromBeg();
+        return;
+    }
+    struct Node* temp = head;
+    for (int i = 1; i < pos - 1 && temp != NULL; i++) {
+        temp = temp->next;
+    }
+    if (temp == NULL || temp->next == NULL) {
+        printf("Invalid position!\n");
+        return;
+    }
+    struct Node* nodeToDelete = temp->next;
+    temp->next = nodeToDelete->next;
+    printf("Deleted %d from position %d\n", nodeToDelete->data, pos);
+    free(nodeToDelete);
+}
+
+void traversal() {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    printf("List: ");
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    int choice, data, pos;
+    
+    printf("=== LINKED LIST OPERATIONS ===\n");
+    
+    while (1) {
+        printf("\n1. Insert at Beginning\n2. Insert at End\n3. Insert at Position\n");
+        printf("4. Delete from Beginning\n5. Delete from End\n6. Delete from Position\n");
+        printf("7. Traversal\n8. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                printf("Enter data: ");
+                scanf("%d", &data);
+                insertAtBeg(data);
+                break;
+            case 2:
+                printf("Enter data: ");
+                scanf("%d", &data);
+                insertAtEnd(data);
+                break;
+            case 3:
+                printf("Enter data and position: ");
+                scanf("%d %d", &data, &pos);
+                insertAtPos(data, pos);
+                break;
+            case 4:
+                deleteFromBeg();
+                break;
+            case 5:
+                deleteFromEnd();
+                break;
+            case 6:
+                printf("Enter position: ");
+                scanf("%d", &pos);
+                deleteFromPos(pos);
+                break;
+            case 7:
+                traversal();
+                break;
+            case 8:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+    return 0;
+}
+```
+
+### Output
+```
+=== LINKED LIST OPERATIONS ===
+
+1. Insert at Beginning
+2. Insert at End
+3. Insert at Position
+4. Delete from Beginning
+5. Delete from End
+6. Delete from Position
+7. Traversal
+8. Exit
+Enter choice: 2
+Enter data: 10
+Inserted 10 at end
+
+Enter choice: 2
+Enter data: 20
+Inserted 20 at end
+
+Enter choice: 1
+Enter data: 5
+Inserted 5 at beginning
+
+Enter choice: 3
+Enter data and position: 15 3
+Inserted 15 at position 3
+
+Enter choice: 7
+List: 5 -> 10 -> 15 -> 20 -> NULL
+
+Enter choice: 4
+Deleted 5 from beginning
+
+Enter choice: 6
+Enter position: 2
+Deleted 15 from position 2
+
+Enter choice: 7
+List: 10 -> 20 -> NULL
+
+Enter choice: 8
+Exiting...
+```
+
+### Result
+The program successfully demonstrates complete linked list operations including creation, insertion at three positions (beginning, end, specific position), deletion from three positions, and traversal. All operations work correctly with proper error handling.
+
+---
+
+## Program 9: Binary Search Tree Implementation
+
+### Aim
+To implement a Binary Search Tree (BST) with insertion operation and display its inorder, preorder, and postorder traversals.
+
+### Theory
+A Binary Search Tree is a hierarchical data structure where each node has at most two children (left and right). For every node, all values in left subtree are smaller and all values in right subtree are greater.
+
+**Properties:**
+- Left subtree < Root < Right subtree
+- Inorder gives sorted sequence
+- Efficient searching: O(log n) average case
+
+**Traversal Types:**
+- **Inorder (LNR)**: Left → Node → Right (gives sorted order)
+- **Preorder (NLR)**: Node → Left → Right (used for copying tree)
+- **Postorder (LRN)**: Left → Right → Node (used for deleting tree)
+
+### Algorithm
+
+**Insert Node:**
+```
+INSERT(root, data)
+1. IF root == NULL, create new node
+2. IF data < root->data, insert in left subtree
+3. ELSE insert in right subtree
+4. RETURN root
+END
+```
+
+**Inorder Traversal:**
+```
+INORDER(root)
+1. IF root != NULL
+2.   INORDER(root->left)
+3.   Print root->data
+4.   INORDER(root->right)
+END
+```
+
+### Code
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+void preorder(struct Node* root) {
+    if (root != NULL) {
+        printf("%d ", root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(struct Node* root) {
+    if (root != NULL) {
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d ", root->data);
+    }
+}
+
+int main() {
+    struct Node* root = NULL;
+    int choice, data;
+    
+    printf("=== BINARY SEARCH TREE ===\n");
+    
+    while (1) {
+        printf("\n1. Insert\n2. Inorder Traversal\n3. Preorder Traversal\n");
+        printf("4. Postorder Traversal\n5. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                printf("Enter data: ");
+                scanf("%d", &data);
+                root = insert(root, data);
+                printf("Inserted %d\n", data);
+                break;
+            case 2:
+                printf("Inorder: ");
+                inorder(root);
+                printf("\n");
+                break;
+            case 3:
+                printf("Preorder: ");
+                preorder(root);
+                printf("\n");
+                break;
+            case 4:
+                printf("Postorder: ");
+                postorder(root);
+                printf("\n");
+                break;
+            case 5:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+    return 0;
+}
+```
+
+### Output
+```
+=== BINARY SEARCH TREE ===
+
+1. Insert
+2. Inorder Traversal
+3. Preorder Traversal
+4. Postorder Traversal
+5. Exit
+Enter choice: 1
+Enter data: 50
+Inserted 50
+
+Enter choice: 1
+Enter data: 30
+Inserted 30
+
+Enter choice: 1
+Enter data: 70
+Inserted 70
+
+Enter choice: 1
+Enter data: 20
+Inserted 20
+
+Enter choice: 1
+Enter data: 40
+Inserted 40
+
+Enter choice: 2
+Inorder: 20 30 40 50 70
+
+Enter choice: 3
+Preorder: 50 30 20 40 70
+
+Enter choice: 4
+Postorder: 20 40 30 70 50
+
+Enter choice: 5
+Exiting...
+```
+
+### Result
+The BST implementation successfully creates a binary search tree and performs all three traversals correctly. Inorder traversal produces sorted sequence (20, 30, 40, 50, 70), confirming proper BST structure.
+
+---
+
+## Program 10: Graph Traversal - DFS and BFS
+
+### Aim
+To implement Depth First Search (DFS) and Breadth First Search (BFS) traversal techniques on a graph using adjacency matrix representation.
+
+### Theory
+Graph traversal algorithms visit all vertices of a graph systematically.
+
+**Depth First Search (DFS):**
+- Uses stack (or recursion)
+- Explores as deep as possible before backtracking
+- Applications: Cycle detection, topological sorting, maze solving
+
+**Breadth First Search (BFS):**
+- Uses queue
+- Explores level by level
+- Applications: Shortest path, web crawling, social networks
+
+**Time Complexity:** O(V + E) where V = vertices, E = edges  
+**Space Complexity:** O(V) for visited array and stack/queue
+
+### Algorithm
+
+**DFS Algorithm:**
+```
+DFS(vertex, visited)
+1. Mark vertex as visited
+2. Print vertex
+3. FOR each adjacent vertex
+4.   IF not visited, call DFS(adjacent)
+END
+```
+
+**BFS Algorithm:**
+```
+BFS(start)
+1. Create queue and enqueue start
+2. Mark start as visited
+3. WHILE queue not empty
+4.   Dequeue vertex and print
+5.   FOR each adjacent vertex
+6.     IF not visited, mark and enqueue
+END
+```
+
+### Code
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 20
+
+int graph[MAX][MAX], visited[MAX], n;
+
+void DFS(int vertex) {
+    printf("%d ", vertex);
+    visited[vertex] = 1;
+    
+    for (int i = 0; i < n; i++) {
+        if (graph[vertex][i] == 1 && !visited[i]) {
+            DFS(i);
+        }
+    }
+}
+
+void BFS(int start) {
+    int queue[MAX], front = 0, rear = 0;
+    
+    for (int i = 0; i < n; i++) {
+        visited[i] = 0;
+    }
+    
+    printf("%d ", start);
+    visited[start] = 1;
+    queue[rear++] = start;
+    
+    while (front < rear) {
+        int vertex = queue[front++];
+        
+        for (int i = 0; i < n; i++) {
+            if (graph[vertex][i] == 1 && !visited[i]) {
+                printf("%d ", i);
+                visited[i] = 1;
+                queue[rear++] = i;
+            }
+        }
+    }
+}
+
+int main() {
+    int edges, u, v, choice, start;
+    
+    printf("=== GRAPH TRAVERSAL (DFS & BFS) ===\n");
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+    
+    printf("Enter number of edges: ");
+    scanf("%d", &edges);
+    
+    // Initialize graph
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            graph[i][j] = 0;
+        }
+    }
+    
+    printf("Enter edges (u v):\n");
+    for (int i = 0; i < edges; i++) {
+        scanf("%d %d", &u, &v);
+        graph[u][v] = 1;
+        graph[v][u] = 1; // For undirected graph
+    }
+    
+    while (1) {
+        printf("\n1. DFS Traversal\n2. BFS Traversal\n3. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                printf("Enter starting vertex: ");
+                scanf("%d", &start);
+                for (int i = 0; i < n; i++) {
+                    visited[i] = 0;
+                }
+                printf("DFS Traversal: ");
+                DFS(start);
+                printf("\n");
+                break;
+            case 2:
+                printf("Enter starting vertex: ");
+                scanf("%d", &start);
+                printf("BFS Traversal: ");
+                BFS(start);
+                printf("\n");
+                break;
+            case 3:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+    return 0;
+}
+```
+
+### Output
+```
+=== GRAPH TRAVERSAL (DFS & BFS) ===
+Enter number of vertices: 5
+Enter number of edges: 6
+Enter edges (u v):
+0 1
+0 2
+1 3
+1 4
+2 4
+3 4
+
+1. DFS Traversal
+2. BFS Traversal
+3. Exit
+Enter choice: 1
+Enter starting vertex: 0
+DFS Traversal: 0 1 3 4 2
+
+1. DFS Traversal
+2. BFS Traversal
+3. Exit
+Enter choice: 2
+Enter starting vertex: 0
+BFS Traversal: 0 1 2 3 4
+
+1. DFS Traversal
+2. BFS Traversal
+3. Exit
+Enter choice: 3
+Exiting...
+```
+
+### Result
+The program successfully implements both DFS and BFS graph traversal algorithms. DFS explores deeply (0→1→3→4→2) while BFS explores level-wise (0→1→2→3→4). Both algorithms correctly traverse all reachable vertices from the starting vertex.
+
+---
+
+## Overall Summary (Programs 8-10)
+
+These three programs complete the essential data structures curriculum:
+
+1. **Program 8 (Complete Linked List)**: Demonstrates comprehensive linked list operations with positional insertions and deletions, providing full control over list manipulation.
+
+2. **Program 9 (Binary Search Tree)**: Implements hierarchical data structure with efficient searching and demonstrates three fundamental tree traversal techniques.
+
+3. **Program 10 (Graph Traversal)**: Covers both major graph traversal algorithms (DFS and BFS), essential for graph-based problem solving.
+
+**Key Concepts Covered:**
+- Dynamic memory allocation and pointer manipulation
+- Recursive algorithms (DFS, tree traversals)
+- Queue-based algorithms (BFS)
+- Tree and graph data structures
+- Time and space complexity analysis
+
+These implementations provide a solid foundation for advanced algorithms and data structure applications in computer science.
