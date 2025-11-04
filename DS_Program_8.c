@@ -126,16 +126,16 @@ void traversal() {
 
 int main() {
     int choice, data, pos;
-    
+
     printf("=== LINKED LIST OPERATIONS ===\n");
-    
+
     while (1) {
         printf("\n1. Insert at Beginning\n2. Insert at End\n3. Insert at Position\n");
         printf("4. Delete from Beginning\n5. Delete from End\n6. Delete from Position\n");
         printf("7. Traversal\n8. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
-        
+
         switch (choice) {
             case 1:
                 printf("Enter data: ");

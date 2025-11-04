@@ -52,15 +52,15 @@ void postorder(struct Node* root) {
 int main() {
     struct Node* root = NULL;
     int choice, data;
-    
+
     printf("=== BINARY SEARCH TREE ===\n");
-    
+
     while (1) {
         printf("\n1. Insert\n2. Inorder Traversal\n3. Preorder Traversal\n");
         printf("4. Postorder Traversal\n5. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
-        
+
         switch (choice) {
             case 1:
                 printf("Enter data: ");
